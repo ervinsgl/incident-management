@@ -1,0 +1,54 @@
+{
+  "name": "vassBuildingCapWithBas2_GLEIZDS",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.15.0",
+    "@sap-cloud-sdk/resilience": "^3.15.0",
+    "@sap/cds": "^7",
+    "@sap/xssec": "^3",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
+    "passport": "^0.7.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/eslint-plugin-cds": "^3",
+    "eslint": "^9"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": ":memory:"
+        }
+      },
+      "Northwind": {
+        "kind": "rest",
+        "credentials": {
+          "url": "https://services.odata.org/Experimental/OData/OData.svc"
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "Northwind"
+          }
+        }
+      },
+      "[production]":{
+        "auth": "xsuaa"
+      }
+    },
+    "features": {
+      "in_memory_db": true
+    }
+  },
+  "scripts": {
+    "start": "cds-serve"
+  }
+}
